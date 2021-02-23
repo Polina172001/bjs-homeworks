@@ -1,4 +1,4 @@
- /*
+/*
 	Кратко о работе с функциями:
 	1) Значения в скобках - это аргументы, которые мы получаем в момент вызова функции. Их и надо присваивать требуемым в заданиях переменным.
 	2) После ключевого слова return вместо комментария необходимо написать переменную либо выражение с ответом.
@@ -6,22 +6,36 @@
  */
 
 function averageMark(a, g, p) {
-	
-    // реализуйте здесь задание №1
+
+	let algebra;
+	let geography;
+	let physics;
+
+	algebra = a;
+	geography = g;
+	physics = p;
+
+	averageRating = ( a + g + p ) / averageMark.length;
+	result = averageRating;
     
-	return // ваш ответ;
+	return result;
 }
 
 function sayHello(userName) {
-	
-    // реализуйте здесь задание №2
+
+	let myName = userName;
+	let message = `Привет, мир! Меня зовут ${myName}`;
     
-	return // ваш ответ;
+	return message;
 }
 
 function calculateFormula() {
     
-	// реализуйте здесь задание №3
+	let x = 2;
+	let y = 22;
+	let z = 0;
+
+	result = (x * y + 5 * z + x - 1);
     
-    return // ваш ответ;
+  return result;
 }
