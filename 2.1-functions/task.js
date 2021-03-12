@@ -80,7 +80,7 @@ function getPersonData(secretData) {
     let value = secretData[prom];
     res += getDecodedValue(value) + " "
   }
-  return `{firstName: ${res}, lastName: ${res}}`
+  return `{firstName: ${res.slice(0, 7)}, lastName: ${res.slice(7)}}`
 }
 
 function getDecodedValue(secret) {
