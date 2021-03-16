@@ -74,13 +74,10 @@ function getAverageMark(marks) {
 // 3 задача
 
 function getPersonData(secretData) {
-    
-  let res = "";
-  for (let prom in secretData) {
-    let value = secretData[prom];
-    res += getDecodedValue(value) + " "
+  return {
+    firstName: getDecodedValue(secretData.aaa),
+    lastName: getDecodedValue(secretData.bbb)
   }
-  return `{firstName: ${res.slice(0, 7)}, lastName: ${res.slice(7)}}`
 }
 
 function getDecodedValue(secret) {
