@@ -13,8 +13,8 @@ function parseCount(value) {
 function validateCount(value) {
   try {
     return parseCount(value)
-  } catch {
-    return new Error (parseCount)
+  } catch(e) {
+    return e
   } 
 }
 
@@ -30,13 +30,12 @@ class Triangle {
     this.c = c;
   }
   getPerimeter() {
-    let perimeter = this.a + this.b + this.c;
-    return perimeter;
+    return this.a + this.b + this.c;
   }
   getArea() {
     let pp = this.getPerimeter() / 2;
     let area = Math.sqrt(pp * (pp - this.a) * (pp - this.b) * (pp - this.c))
-    return area.toFixed(3)
+    return +area.toFixed(3)
   }
 }
 
@@ -44,7 +43,7 @@ class Triangle {
 function getTriangle(a, b, c) {
   try {
     return new Triangle(a, b, c)
-  } catch {
+  } catch(e) {
     let obj = {
       getArea() {return "Ошибка! Треугольник не существует"},
       getPerimeter() {return "Ошибка! Треугольник не существует"}
