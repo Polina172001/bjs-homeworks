@@ -100,11 +100,12 @@ class Library extends Book{
   giveBookByName(bookName) {
     for (let i = 0; i < this.books.length; i++) {
       if(this.books[i].name === bookName) {
-        this.books.splice([i], 1);
-        return this.books[i].name;
+        let given = this.books[i]
+        this.books.splice(this.books[i], 1);
+        return given;
       } 
-      return null;
     }
+    return null;
   }
 
 }
