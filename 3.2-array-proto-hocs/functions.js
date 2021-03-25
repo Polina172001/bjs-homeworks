@@ -1,48 +1,36 @@
 // 1 задание 
 // console.clear()
+'use strict';
 
 const weapons = [new Knife(), new Staff(), new Axe(), new StormStaff(), new LongBow(), new Bow()];
 
 function getNames() {
-  const names = [];
-  weapons.forEach((item) => {names.push(item.name)});
-  return names;
+  return weapons.map(item => item.name);
 }
-
-console.log(getNames());
 
 
 function getCountReliableWeapons(initDurability) {
-  let count = 0;
-  weapons.forEach((item) => {if (item.durability > initDurability) {count += 1}});
-  return count;
+  return weapons.filter(item => item.durability > initDurability).length;
 }
 
-console.log(getCountReliableWeapons(200))
 
 function hasReliableWeapons(initDurability) {
-  return weapons.some((item) => {
-    if (item.durability > initDurability) {
-      return true;
-    } 
-  });
+  return weapons.some(item => item.durability > initDurability);
 }
 
-console.log(hasReliableWeapons(900));
 
 function getReliableWeaponsNames(initDurability) {
-  let weapon = [];
-  weapons.forEach((item) => {if (item.durability > initDurability) {weapon.push(item.name)}});
-  return weapon;
+
+  return weapons.filter(item => item.durability > initDurability).map(item => item.name);
 }
 
-console.log(getReliableWeaponsNames(900));
+
 
 function getTotalDamage () {
-  let sum = 0;
-  weapons.forEach((item) => {sum += item.attack});
-  return sum;
+  return weapons.reduce((a, b) => a + b.attack, 0);
+
 }
+
 
 // 2 задание
 
@@ -66,19 +54,29 @@ function  compareArrays( arr1, arr2 ) {
 
 function memorize(fn, limit) {
   
-  let memory = [];
-  if(fn() in memory) {
-    return fn.result
-  } else {
-    fn();
-    memory.push(fn());
-    if (limit < memory) {
-      memory.pop(fn())
-    }
+  const memory = [];
+
+  return function(...args) {
+
+    const arg = Array.from(arguments);
+    const remove = (item) => {item.shift()};
+    const findObj = () => {return memory.find(item => compareArrays(item.args, arg))};
+    const newObj = () => {
+      return memory.push( {
+        args: arg,
+        result: fn(...args)
+    })};
+
+    if (findObj() !== undefined) {
+    } else {
+      newObj();
+      if (memory.length > limit) {
+        remove(memory);
+      }
+    } 
+    return findObj().result;
+
   }
-  
-  // const mSum = (...theArgs) => {return theArgs.reduce((first,next) => {return first + next})}; 
-  return fn;
 }
 
 
