@@ -56,25 +56,24 @@ function memorize(fn, limit) {
   
   const memory = [];
 
-  return function(...args) {
+  return  function (...argument) {
 
-    const arg = Array.from(arguments);
-    const remove = (item) => {item.shift()};
-    const findObj = () => {return memory.find(item => compareArrays(item.args, arg))};
-    const newObj = () => {
-      return memory.push( {
-        args: arg,
-        result: fn(...args)
-    })};
+    const findObj =  memory.find(item => compareArrays(item.args, argument));
 
-    if (findObj() !== undefined) {
+    if (findObj !== undefined) {
+      return memory.result;
     } else {
-      newObj();
+      let res = fn(...argument)
+      memory.push( {
+      args: argument,
+      result: res
+    });
       if (memory.length > limit) {
-        remove(memory);
+        memory = memory.shift();
       }
+      return memory.result;
     } 
-    return findObj().result;
+    
 
   }
 }
