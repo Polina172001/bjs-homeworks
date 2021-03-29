@@ -52,29 +52,31 @@ function  compareArrays( arr1, arr2 ) {
   return arr1.length === arr2.length && arr1.every((v,i) => v === arr2[i])
 }
 
+
 function memorize(fn, limit) {
-  
+  debugger;
   const memory = [];
 
   return  function (...argument) {
 
     const findObj =  memory.find(item => compareArrays(item.args, argument));
 
-    if (findObj !== undefined) {
-      return memory.result;
-    } else {
-      let res = fn(...argument)
-      memory.push( {
+    if (findObj) {
+      return findObj.result;
+    } 
+
+    let res = fn(...argument)
+    memory.push({
       args: argument,
       result: res
     });
-      if (memory.length > limit) {
-        memory = memory.shift();
-      }
-      return memory.result;
-    } 
-    
 
+    if (memory.length > limit) {
+      memory = memory.shift();
+    }
+    
+    return res;
+    
   }
 }
 
