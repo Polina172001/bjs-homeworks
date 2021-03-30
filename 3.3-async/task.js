@@ -7,26 +7,23 @@ class AlarmClock {
   }
 
   addClock(time, callback, id ) {
-    if (id === undefined) {
+    if (!id) {
       throw new Error('Параметр id не передан');
     } 
     try {
       if (this.alarmCollection.some(item => item.id === id)) console.error('Такой id существует')
+      else(this.alarmCollection.push( {
+        time, callback, id
+      }))
     } catch(error) {
       return error
     }
-
-    this.alarmCollection.push( {
-      time, callback, id
-    })
   }
-
+  
   removeClock(id) {
-    this.alarmCollection.filter(item => {
-      if (item.id === id) {
-        return delete item.id;
-      }
-    })
+    if(this.alarmCollection = this.alarmCollection.filter(item => item.id != id)) 
+    return true;
+
     return false;
 
   }
@@ -37,7 +34,7 @@ class AlarmClock {
 
   start () {
     let checkClock = calling => { if (calling.time === this.getCurrentFormattedTime()) calling.callback()}
-    if (this.timerId === undefined) {
+    if (!this.timerId) {
       this.timerId = setInterval(() => this.alarmCollection.forEach(calling => checkClock(calling)), 1000)
     }
   }
@@ -47,8 +44,6 @@ class AlarmClock {
       clearInterval(this.timerId);
       this.timerId = null;
     }
-
-
   }
 
   printAlarms() {

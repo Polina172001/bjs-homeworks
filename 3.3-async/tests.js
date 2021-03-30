@@ -14,7 +14,7 @@ describe('Домашнее задание к занятию 3.3 «Асинхро
     clock.addClock("16:45", f => f, 1);
     expect(clock.alarmCollection.length).toEqual(1);
   });
-
+  debugger;
   it('необходимо добавлять и удалять звонок', () => {
     clock.addClock("16:45", f => f, 1);
     expect(clock.alarmCollection.length).toEqual(1);
